@@ -9,6 +9,6 @@ public abstract class Nota
 
     protected virtual bool Validare(float nota)
     {
-        return nota>=1 && nota<=10;
+        return nota >= 1 && nota <= 10;
     }
 }
