@@ -1,11 +1,15 @@
 namespace CarnetDeNote;
 
-public abstract class Nota<T>
+public abstract class Nota<T> where T: IComparable
 {
     protected T nota { get; set; }
-    public Nota(T Nota)
+    public Nota(T nota)
     {
-        Nota = nota;
+        this.nota = nota;
     }
-    protected abstract bool Validare(T nota);
+
+    protected virtual bool Validare(T nota)
+    {
+        return (nota.CompareTo(1)>=0) && (nota.CompareTo(10)<=0);
+    }
 }

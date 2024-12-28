@@ -1,13 +1,9 @@
 namespace CarnetDeNote;
 
-public class NotaActivitate:Nota<int>
+public class NotaActivitate<T> : Nota<T> where T: IComparable
 {
-    public NotaActivitate(int Nota) : base(Nota)
+    public NotaActivitate(T nota) : base(nota)
     {
     }
-
-    protected override bool Validare(int nota)
-    {
-        return nota >= 1 && nota <= 10;
-    }
+    
 }
