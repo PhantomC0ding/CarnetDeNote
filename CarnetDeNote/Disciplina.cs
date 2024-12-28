@@ -3,6 +3,8 @@ public abstract class Disciplina
     protected string Nume { get; set; }
     protected int Semestru { get; set; }
     protected int An { get; set; }
+    
+    protected int Medie { get; set; }
 
     public Disciplina(string nume, int semestru, int an)
     {
