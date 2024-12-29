@@ -1,9 +1,12 @@
+using CarnetDeNote;
+
 public abstract class Disciplina
 {
     protected string Nume { get; set; }
     protected int Semestru { get; set; }
-    protected int An { get; set; }
-    protected int Medie { get; set; }
+    public int An { get; private set; }
+    public List<Nota> note;
+    public int Medie { get; set; }
 
     public Disciplina(string nume, int semestru, int an)
     {
@@ -23,5 +26,6 @@ public abstract class Disciplina
         Nume = nume;
         Semestru = semestru;
         An = an;
+        note=new List<Nota>();
     }
 }
