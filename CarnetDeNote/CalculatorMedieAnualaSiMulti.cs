@@ -1,6 +1,6 @@
 namespace CarnetDeNote;
 
-public class CalculatorMedieAnuala
+public class CalculatorMedieAnualaSiMulti
 {
     private CalculatorMedieDisciplina calc= new CalculatorMedieDisciplina();
 
@@ -8,7 +8,6 @@ public class CalculatorMedieAnuala
     {
         int i = 0;
         float average = 0;
-        if(check)
         foreach (Disciplina disciplina in discipline)
         {
             if (check)

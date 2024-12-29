@@ -1,8 +1,8 @@
 namespace CarnetDeNote;
 
-public class NotaActivitate<T> : Nota<T> where T: IComparable
+public class NotaActivitate : Nota
 {
-    public NotaActivitate(T nota) : base(nota)
+    public NotaActivitate(float nota) : base(nota)
     {
     }
     
