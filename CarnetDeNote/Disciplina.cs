@@ -37,4 +37,5 @@ public abstract class Disciplina
             Console.WriteLine($"Nota: {nota.nota}");
         }
     }
+    
 }
