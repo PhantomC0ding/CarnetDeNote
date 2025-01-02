@@ -1,5 +1,4 @@
 namespace CarnetDeNote;
-
 public abstract class Nota
 {
     public float nota { get; private set; }
@@ -7,7 +6,7 @@ public abstract class Nota
     {
         this.nota = nota;
     }
-
+    
     protected virtual bool Validare(float nota)
     {
         return nota>=1 && nota<=10;
