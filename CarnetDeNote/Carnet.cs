@@ -14,9 +14,5 @@ public class Carnet
             disciplina.PublicaNote();
         }
     }
-    public float CalculeazaMedieAnuala(int an)
-    {
-        var medii = Discipline.Where(d => d.An == an).Select(d => d.Medie);
-        return medii.Any() ? medii.Average() : 0;
-    } 
+    
 }

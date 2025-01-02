@@ -14,4 +14,5 @@ public class Contestație
     {
         Stare = rezultat;
     }
+    ///afiseaza nota dupa contestatie
 }

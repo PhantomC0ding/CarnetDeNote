@@ -28,14 +28,6 @@ public abstract class Disciplina
                 throw new ArgumentNullException(nameof(nota));
             Note.Add(nota);
         }
-
-        public void CalculeazaMedie()
-        {
-            var activitate = Note.OfType<NotaActivitate>().Sum(n => n.nota);
-            var examen = Note.OfType<NotaExamen>().Sum(n => n.nota);
-            Medie = (examen * 2 + activitate) / 3;
-        }
-
         public void PublicaNote()
         {
             Console.WriteLine($"Disciplină: {Nume} (An: {An}, Semestru: {Semestru})");
