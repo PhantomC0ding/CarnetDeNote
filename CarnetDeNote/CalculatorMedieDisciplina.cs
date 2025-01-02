@@ -6,7 +6,7 @@ public class CalculatorMedieDisciplina
     {
         float activitate=0;
         float examen=0;
-        foreach (Nota grade in disciplina.note)
+        foreach (Nota grade in disciplina.Note)
         {
             if (grade is NotaActivitate)
                 activitate += grade.nota;

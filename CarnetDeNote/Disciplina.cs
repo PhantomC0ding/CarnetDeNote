@@ -2,16 +2,12 @@ using CarnetDeNote;
 
 public abstract class Disciplina
 {
-    protected string Nume { get; set; }
-    protected int Semestru { get; set; }
-<<<<<<< HEAD
-    protected int An { get; set; }
-    protected int Medie { get; set; }
-=======
+    public string Nume { get; protected set; }
+    public int Semestru { get; protected set; }
     public int An { get; private set; }
-    public List<Nota> note;
+    public List<Nota> Note { get; private set; }
     public int Medie { get; set; }
->>>>>>> c16edad8762288de11b4aa8d0d5b7488fd9812dc
+
 
     public Disciplina(string nume, int semestru, int an)
     {
@@ -31,6 +27,22 @@ public abstract class Disciplina
         Nume = nume;
         Semestru = semestru;
         An = an;
-        note=new List<Nota>();
+        Note = new List<Nota>();
     }
+
+    public void AdaugaNota(Nota nota)
+    {
+        if (nota == null)
+            throw new ArgumentNullException(nameof(nota));
+        Note.Add(nota);
+    }
+    public void PublicaNote()
+    {
+        Console.WriteLine($"Disciplină: {Nume} (An: {An}, Semestru: {Semestru})");
+        foreach (var nota in Note)
+        {
+            Console.WriteLine($"Nota: {nota.nota}");
+        }
+    }
+    
 }

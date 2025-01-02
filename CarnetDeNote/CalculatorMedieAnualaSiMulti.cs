@@ -2,9 +2,9 @@ namespace CarnetDeNote;
 
 public class CalculatorMedieAnualaSiMulti
 {
-    private CalculatorMedieDisciplina calc= new CalculatorMedieDisciplina();
+    private CalculatorMedieDisciplina calc = new CalculatorMedieDisciplina();
 
-    public int MedieAnuala(List<Disciplina> discipline, bool check,int an)
+    public int MedieAnuala(List<Disciplina> discipline, bool check, int an)
     {
         int i = 0;
         float average = 0;
@@ -30,9 +30,11 @@ public class CalculatorMedieAnualaSiMulti
                 }
             }
         }
-        if(average>0)
-            return (int)Math.Round(average/i);
-        else 
+
+        if (average > 0)
+            return (int)Math.Round(average / i);
+        else
             return 0;
     }
+
 }
