@@ -4,15 +4,10 @@ public abstract class Disciplina
 {
     protected string Nume { get; set; }
     protected int Semestru { get; set; }
-<<<<<<< HEAD
-    protected int An { get; set; }
-    protected int Medie { get; set; }
-=======
     public int An { get; private set; }
     public List<Nota> note;
     public int Medie { get; set; }
->>>>>>> c16edad8762288de11b4aa8d0d5b7488fd9812dc
-
+    
     public Disciplina(string nume, int semestru, int an)
     {
         if (string.IsNullOrWhiteSpace(nume))
