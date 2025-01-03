@@ -16,7 +16,6 @@ public abstract class Disciplina
             throw new ArgumentException("Semestrul trebuie sa fie 1 sau 2.");
         if (an < 1)
             throw new ArgumentException("Anul trebuie sa fie cel putin 1.");
-
         Nume = nume;
         Semestru = semestru;
         An = an;

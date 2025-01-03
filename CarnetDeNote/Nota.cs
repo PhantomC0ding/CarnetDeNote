@@ -6,7 +6,7 @@ public abstract class Nota
     {
         this.nota = nota;
     }
-     
+
     protected virtual bool Validare(float nota)
     {
         return nota>=1 && nota<=10;
