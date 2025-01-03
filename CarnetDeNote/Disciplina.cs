@@ -13,10 +13,9 @@ public abstract class Disciplina
         if (string.IsNullOrWhiteSpace(nume))
             throw new ArgumentException("Numele disciplinei nu poate fi gol.");
         if (semestru < 1 || semestru > 2)
-            throw new ArgumentException("Semestrul trebuie să fie 1 sau 2.");
+            throw new ArgumentException("Semestrul trebuie sa fie 1 sau 2.");
         if (an < 1)
-            throw new ArgumentException("Anul trebuie să fie cel puțin 1.");
-
+            throw new ArgumentException("Anul trebuie sa fie cel putin 1.");
         Nume = nume;
         Semestru = semestru;
         An = an;
@@ -31,7 +30,7 @@ public abstract class Disciplina
     }
     public void PublicaNote()
     {
-        Console.WriteLine($"Disciplină: {Nume} (An: {An}, Semestru: {Semestru})");
+        Console.WriteLine($"Disciplina: {Nume} (An: {An}, Semestru: {Semestru})");
         foreach (var nota in Note)
         {
             Console.WriteLine($"Nota: {nota.nota}");
