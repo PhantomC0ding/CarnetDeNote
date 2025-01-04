@@ -6,35 +6,19 @@ public class CalculatorMedieAnualaSiMulti
 
     public int MedieAnuala(List<Disciplina> discipline, bool check, int an)
     {
-        int i = 0;
-        float average = 0;
-        foreach (Disciplina disciplina in discipline)
-        {
-            if (check)
-            {
+        var disciplineFiltrate = discipline
+            .Where(d => !(d is DisciplinaFacultativa) && (!check || d.An == an))
+            .ToList();
 
-                if (!(disciplina is DisciplinaFacultativa) && disciplina.An == an)
-                {
-                    calc.MedieDisciplina(disciplina);
-                    i++;
-                    average += disciplina.Medie;
-                }
-            }
-            else
-            {
-                if (!(disciplina is DisciplinaFacultativa))
-                {
-                    calc.MedieDisciplina(disciplina);
-                    i++;
-                    average += disciplina.Medie;
-                }
-            }
+        foreach (var disciplina in disciplineFiltrate)
+        {
+            calc.MedieDisciplina(disciplina);
         }
 
-        if (average > 0)
-            return (int)Math.Round(average / i);
-        else
-            return 0;
-    }
+        var average = disciplineFiltrate
+            .Where(d => d.Medie > 0)
+            .Average(d => d.Medie);
 
+        return average > 0 ? (int)Math.Round(average) : 0;
+    }
 }
