@@ -31,10 +31,6 @@ public abstract class Disciplina
     public void PublicaNote()
     {
         Console.WriteLine($"Disciplina: {Nume} (An: {An}, Semestru: {Semestru})");
-        foreach (var nota in Note)
-        {
-            Console.WriteLine($"Nota: {nota.nota}");
-        }
+        Note.ForEach(n => Console.WriteLine($"Nota: {n.nota}"));
     }
-    
 }
