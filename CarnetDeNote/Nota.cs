@@ -1,14 +1,12 @@
 namespace CarnetDeNote;
-public abstract class Nota
+public class Nota
 {
-    public float nota { get; private set; }
-    public Nota(float nota)
+    public float Valoare { get; private set; }
+
+    public Nota(float valoare)
     {
-        this.nota = nota;
-    }
-     
-    protected virtual bool Validare(float nota)
-    {
-        return nota>=1 && nota<=10;
+        if (valoare < 1 || valoare > 10)
+            throw new ArgumentException("Nota trebuie sa fie intre 1 si 10.");
+        Valoare = valoare;
     }
 }
