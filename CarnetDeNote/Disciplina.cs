@@ -16,7 +16,10 @@ public abstract class Disciplina
             throw new ArgumentException("Semestrul trebuie sa fie 1 sau 2.");
         if (an < 1)
             throw new ArgumentException("Anul trebuie sa fie cel putin 1.");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 075d2d7db751e6ad3695e02d2625596414cdd20c
         Nume = nume;
         Semestru = semestru;
         An = an;
@@ -33,7 +36,11 @@ public abstract class Disciplina
     public virtual void PublicaNote()
     {
         Console.WriteLine($"Disciplina: {Nume} (An: {An}, Semestru: {Semestru})");
+<<<<<<< HEAD
         if (Note.Count == 0)
+=======
+        foreach (var nota in Note)
+>>>>>>> 075d2d7db751e6ad3695e02d2625596414cdd20c
         {
             Console.WriteLine("Nu exista note pentru aceasta disciplina.");
         }
