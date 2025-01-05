@@ -1,24 +1,27 @@
+using System.Linq;
+
 namespace CarnetDeNote;
 
 public class CalculatorMedieAnualaSiMulti
 {
-    private CalculatorMedieDisciplina calc = new CalculatorMedieDisciplina();
+    private readonly CalculatorMedieDisciplina calc = new CalculatorMedieDisciplina();
 
-    public int MedieAnuala(List<Disciplina> discipline, bool check, int an)
+    public int CalculeazaMedieAnuala(List<Disciplina> discipline, int an, bool includeFacultative = false)
     {
-        var disciplineFiltrate = discipline
-            .Where(d => !(d is DisciplinaFacultativa) && (!check || d.An == an))
+        var disciplineRelevante = discipline.Where(d => (includeFacultative || !(d is DisciplinaFacultativa)) && d.An == an)
             .ToList();
+        
+        disciplineRelevante.ForEach(d => calc.MedieDisciplina(d));
+        
+        return disciplineRelevante.Any() ? (int)Math.Round(disciplineRelevante.Average(d => d.Medie)) : 0;
+    }
 
-        foreach (var disciplina in disciplineFiltrate)
-        {
-            calc.MedieDisciplina(disciplina);
-        }
-
-        var average = disciplineFiltrate
-            .Where(d => d.Medie > 0)
-            .Average(d => d.Medie);
-
-        return average > 0 ? (int)Math.Round(average) : 0;
+    public int CalculeazaMedieMultianuala(List<Disciplina> discipline, bool includeFacultative = false)
+    {
+        var disciplineRelevante = discipline.Where(d => includeFacultative || !(d is DisciplinaFacultativa)).ToList();
+        
+        disciplineRelevante.ForEach(d => calc.MedieDisciplina(d));
+        
+        return disciplineRelevante.Any() ? (int)Math.Round(disciplineRelevante.Average(d => d.Medie)) : 0;
     }
 }
