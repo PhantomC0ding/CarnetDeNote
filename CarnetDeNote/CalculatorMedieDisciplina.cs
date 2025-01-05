@@ -6,11 +6,11 @@ public class CalculatorMedieDisciplina
     {
         float activitate = disciplina.Note
             .OfType<NotaActivitate>() 
-            .Sum(n => n.nota); 
+            .Sum(n => n.Valoare); 
 
         float examen = disciplina.Note
             .OfType<NotaExamen>() 
-            .Sum(n => n.nota);
+            .Sum(n => n.Valoare);
 
         disciplina.Medie = (int)Math.Round((examen * 2 + activitate) / 3);
     }

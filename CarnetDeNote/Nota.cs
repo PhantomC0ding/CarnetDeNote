@@ -1,10 +1,10 @@
 namespace CarnetDeNote;
 public abstract class Nota
 {
-    public float nota { get; private set; }
+    public float Valoare { get; private set; }
     public Nota(float nota)
     {
-        this.nota = nota;
+        this.Valoare = nota;
     }
 
     protected virtual bool Validare(float nota)
