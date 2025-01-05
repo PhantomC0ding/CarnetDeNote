@@ -16,7 +16,6 @@ public abstract class Disciplina
             throw new ArgumentException("Semestrul trebuie sa fie 1 sau 2.");
         if (an < 1)
             throw new ArgumentException("Anul trebuie sa fie cel putin 1.");
-
         Nume = nume;
         Semestru = semestru;
         An = an;
@@ -32,10 +31,6 @@ public abstract class Disciplina
     public void PublicaNote()
     {
         Console.WriteLine($"Disciplina: {Nume} (An: {An}, Semestru: {Semestru})");
-        foreach (var nota in Note)
-        {
-            Console.WriteLine($"Nota: {nota.nota}");
-        }
+        Note.ForEach(n => Console.WriteLine($"Nota: {n.nota}"));
     }
-    
 }

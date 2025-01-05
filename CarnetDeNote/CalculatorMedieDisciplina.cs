@@ -4,15 +4,14 @@ public class CalculatorMedieDisciplina
 {
     public void MedieDisciplina(Disciplina disciplina)
     {
-        float activitate=0;
-        float examen=0;
-        foreach (Nota grade in disciplina.Note)
-        {
-            if (grade is NotaActivitate)
-                activitate += grade.nota;
-            if(grade is NotaExamen)
-                examen += grade.nota;
-        }
-        disciplina.Medie = (int)Math.Round((examen*2+activitate)/3);
+        float activitate = disciplina.Note
+            .OfType<NotaActivitate>() 
+            .Sum(n => n.nota); 
+
+        float examen = disciplina.Note
+            .OfType<NotaExamen>() 
+            .Sum(n => n.nota);
+
+        disciplina.Medie = (int)Math.Round((examen * 2 + activitate) / 3);
     }
 }
