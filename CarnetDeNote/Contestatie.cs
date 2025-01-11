@@ -1,19 +1,19 @@
 namespace CarnetDeNote;
 
-public class Contestație : Nota
+public class Contestatie : Nota
 {
     public float NotaDupaContestatie { get; private set; }
-    public string StareContestație { get; private set; }
+    public string StareContestatie { get; private set; }
 
-    public Contestație(float nota, string stareInițială = "În așteptare") : base(nota)
+    public Contestatie(float nota, string stareInitiala = "In asteptare") : base(nota)
     {
-        StareContestație = stareInițială;
+        StareContestatie = stareInitiala;
         NotaDupaContestatie = nota; 
     }
 
     public void ActualizeazaNota(float notaNoua, string stare)
     {
         NotaDupaContestatie = notaNoua;
-        StareContestație = stare;
+        StareContestatie = stare;
     }
 }
