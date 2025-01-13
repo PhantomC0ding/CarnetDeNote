@@ -6,7 +6,7 @@ public abstract class Disciplina
     public int Semestru { get; protected set; }
     public int An { get; private set; }
     public List<Nota> Note { get; private set; }
-    public float Medie { get; set; }
+    public int Medie { get; set; }
 
     public Disciplina(string nume, int semestru, int an)
     {
@@ -28,10 +28,18 @@ public abstract class Disciplina
             throw new ArgumentNullException(nameof(nota));
         Note.Add(nota);
     }
-    public void PublicaNote()
+
+    public virtual void PublicaNote()
     {
         Console.WriteLine($"Disciplina: {Nume} (An: {An}, Semestru: {Semestru})");
-        Note.ForEach(n => Console.WriteLine($"Nota: {n.nota}"));
+        if (Note.Count == 0)
+        {
+            Console.WriteLine("Nu exista note pentru aceasta disciplina.");
+        }
+        else
+        {
+            Note.ForEach(n => Console.WriteLine($"Nota: {n.Valoare}"));
+        }
     }
     
 }
