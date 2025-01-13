@@ -33,4 +33,5 @@ public abstract class Disciplina
         Console.WriteLine($"Disciplina: {Nume} (An: {An}, Semestru: {Semestru})");
         Note.ForEach(n => Console.WriteLine($"Nota: {n.nota}"));
     }
+    
 }
