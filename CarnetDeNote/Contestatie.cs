@@ -16,4 +16,5 @@ public class Contestatie : Nota
         NotaDupaContestatie = notaNoua;
         StareContestatie = stare;
     }
+
 }

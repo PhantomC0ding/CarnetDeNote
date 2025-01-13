@@ -1,4 +1,4 @@
-﻿using CarnetDeNote;
+using CarnetDeNote;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,23 +16,21 @@ internal class Program
             .WriteTo.Console()
             .CreateLogger();
         var host = Host.CreateDefaultBuilder()
-            .ConfigureServices((context, services) =>
-            {
-                services.AddTransient<IMeniuInteractiv, MeniuInteractiv>();
-            })
+            .ConfigureServices((context, services) => { services.AddTransient<IMeniuInteractiv, MeniuInteractiv>(); })
             .UseSerilog()
             .Build();
-        
-        var svc=ActivatorUtilities.CreateInstance<MeniuInteractiv>(host.Services);
+
+        var svc = ActivatorUtilities.CreateInstance<MeniuInteractiv>(host.Services);
         svc.Execute();
     }
-    
+
     static void BuildConfiguration(IConfigurationBuilder builder)
     {
         builder.SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")?? "Production"} .json", optional: true, reloadOnChange: true)
+            .AddJsonFile(
+                $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"} .json",
+                optional: true, reloadOnChange: true)
             .AddEnvironmentVariables();
     }
 }
-
