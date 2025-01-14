@@ -15,10 +15,11 @@ public class MeniuInteractiv : IMeniuInteractiv
     }
 
     public void Execute()
-    {
+    {   
+        Fisiere initializare = new Fisiere();
+        Carnet carnet = initializare.ReadFromFile();
          try
         {
-            Carnet carnet = new Carnet();
             CalculatorMedieAnualaSiMulti calcMedie = new CalculatorMedieAnualaSiMulti();
             const string adminPassword = "admin123";
 
@@ -175,16 +176,57 @@ public class MeniuInteractiv : IMeniuInteractiv
     void InroleazaStudentLaDisciplina(Carnet carnet)
     {
         try
-        {
-            Console.Write("Introduceti numele disciplinei: ");
-            string nume = Console.ReadLine();
-            Console.Write("Introduceti semestrul: ");
-            int semestru = int.Parse(Console.ReadLine());
-            Console.Write("Introduceti anul: ");
-            int an = int.Parse(Console.ReadLine());
-
-            var disciplina = new DisciplinaOptionala(nume, semestru, an);
-            carnet.Discipline.Add(disciplina);
+        {   
+            Console.WriteLine("Introduceti tipul disciplinei (1-optionala/2-facultativa): ");
+            int tipDisciplina = int.Parse(Console.ReadLine());
+            switch (tipDisciplina)
+            {
+                case 1:
+                    Console.WriteLine("Discipline optionale:");
+                    foreach (var disciplina in carnet.DisciplineOptionale)
+                    {
+                        Console.WriteLine($"Nume: {disciplina.Nume}, Semestru: {disciplina.Semestru}, An: {disciplina.An}");
+                    }
+                    Console.Write("Introduceti numele disciplinei: ");
+                    string nume = Console.ReadLine();
+                    
+                    var optionala = new DisciplinaOptionala(carnet.DisciplineOptionale.Where(i=>i.Nume==nume).FirstOrDefault().Nume, 
+                        carnet.DisciplineOptionale.Where(i=>i.Nume==nume).FirstOrDefault().Semestru, 
+                        carnet.DisciplineOptionale.Where(i=>i.Nume==nume).FirstOrDefault().An);
+                    if (optionala == null)
+                    {
+                        Console.WriteLine("Disciplina nu a fost gasita.");
+                        Console.ReadKey();
+                        return;
+                    }
+                    carnet.Discipline.Add(optionala);
+                    break;
+                case 2:
+                    Console.WriteLine("Discipline facultative:");
+                    foreach (var disciplina in carnet.DisciplineFacultative)
+                    {
+                        Console.WriteLine($"Nume: {disciplina.Nume}, Semestru: {disciplina.Semestru}, An: {disciplina.An}");
+                    }
+                    Console.Write("Introduceti numele disciplinei: ");
+                    string numeFacultativa = Console.ReadLine();
+                    
+                    var facultativa = new DisciplinaOptionala(carnet.DisciplineFacultative.Where(i=>i.Nume==numeFacultativa).FirstOrDefault().Nume, 
+                        carnet.DisciplineFacultative.Where(i=>i.Nume==numeFacultativa).FirstOrDefault().Semestru, 
+                        carnet.DisciplineFacultative.Where(i=>i.Nume==numeFacultativa).FirstOrDefault().An);
+                    if (facultativa == null)
+                    {
+                        Console.WriteLine("Disciplina nu a fost gasita.");
+                        Console.ReadKey();
+                        return;
+                    }
+                    carnet.Discipline.Add(facultativa);
+                    break;
+                default:
+                    Console.WriteLine("Tip de disciplina invalid.");
+                    Console.ReadKey();
+                    return;
+            }
+            
 
             Console.WriteLine("Studentul a fost inrolat la disciplina.");
             Console.ReadKey();
