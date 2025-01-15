@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace CarnetDeNote;
 
 public class CalculatorMedieAnualaSiMulti
