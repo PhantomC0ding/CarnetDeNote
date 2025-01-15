@@ -3,7 +3,7 @@ namespace CarnetDeNote;
 public class Contestatie : Nota
 {
     public float NotaDupaContestatie { get; private set; }
-    public string StareContestatie { get; private set; }
+    public string StareContestatie { get;  set; }
 
     public Contestatie(float nota, string stareInitiala = "In asteptare") : base(nota)
     {
