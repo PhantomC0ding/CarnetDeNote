@@ -18,130 +18,149 @@ public class MeniuInteractiv : IMeniuInteractiv
     {   
         Fisiere initializare = new Fisiere();
         Carnet carnet = initializare.ReadFromFile();
-         try
-        {
-            CalculatorMedieAnualaSiMulti calcMedie = new CalculatorMedieAnualaSiMulti();
-            const string adminPassword = "admin123";
+        CalculatorMedieAnualaSiMulti calcMedie = new CalculatorMedieAnualaSiMulti(); 
+        const string adminPassword = "admin123";
 
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("\n--- Carnet de Note ---");
-                Console.WriteLine("1. Student");
-                Console.WriteLine("2. Administrator");
-                Console.WriteLine("3. Iesire");
-                Console.Write("Alege o optiune: ");
-
-                switch (Console.ReadLine())
+                try
                 {
-                    case "1":
-                        MeniuStudent(carnet);
-                        break;
-                    case "2":
-                        Console.Write("Introduceti parola: ");
-                        string password = Console.ReadLine();
-                        if (password == adminPassword)
-                        {
-                            MeniuAdministrator(carnet, calcMedie);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Parola incorecta!");
+                    Console.Clear();
+                    Console.WriteLine("\n--- Carnet de Note ---");
+                    Console.WriteLine("1. Student");
+                    Console.WriteLine("2. Administrator");
+                    Console.WriteLine("3. Iesire");
+                    Console.Write("Alege o optiune: ");
+
+                    switch (Console.ReadLine())
+                    {
+                        case "1":
+                            MeniuStudent(carnet);
+                            break;
+                        case "2":
+                            Console.Write("Introduceti parola: ");
+                            string password = Console.ReadLine();
+                            if (password == adminPassword)
+                            {
+                                MeniuAdministrator(carnet, calcMedie);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Parola incorecta!");
+                                Console.ReadKey();
+                            }
+
+                            break;
+                        case "3":
+                            return;
+                        default:
+                            Console.WriteLine("Optiune invalida. Incercati din nou.");
                             Console.ReadKey();
-                        }
-                        break;
-                    case "3":
-                        return;
-                    default:
-                        Console.WriteLine("Optiune invalida. Incercati din nou.");
-                        Console.ReadKey();
-                        break;
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "A aparut o eroare in timpul executiei meniului principal.");
                 }
             }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning(ex, "A aparut o eroare in timpul executiei meniului principal.");
-        }
     }
 
-    void MeniuStudent(Carnet carnet)
+    private void MeniuStudent(Carnet carnet)
     {
-        try
-        {
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("\n--- Meniu Student ---");
-                Console.WriteLine("1. Vizualizeaza note");
-                Console.WriteLine("2. Inroleaza-te la o disciplina optionala/facultativa");
-                Console.WriteLine("3. Trimite si urmareste o contestatie");
-                Console.WriteLine("4. Inapoi la meniul principal");
-                Console.Write("Alege o optiune: ");
-
-                switch (Console.ReadLine())
+                try
                 {
-                    case "1":
-                        VizualizeazaNoteStudent(carnet);
-                        break;
-                    case "2":
-                        InroleazaStudentLaDisciplina(carnet);
-                        break;
-                    case "3":
-                        TrimiteSiUrmaresteContestatie(carnet);
-                        break;
-                    case "4":
-                        return;
-                    default:
-                        Console.WriteLine("Optiune invalida. Incercati din nou.");
-                        Console.ReadKey();
-                        break;
+
+
+                    Console.Clear();
+                    Console.WriteLine("\n--- Meniu Student ---");
+                    Console.WriteLine("1. Vizualizeaza note");
+                    Console.WriteLine("2. Inroleaza-te la o disciplina optionala/facultativa");
+                    Console.WriteLine("3. Trimite si urmareste o contestatie");
+                    Console.WriteLine("4. Salveaza modificarile");
+                    Console.WriteLine("5. Inapoi la meniul principal");
+                    Console.Write("Alege o optiune: ");
+
+                    switch (Console.ReadLine())
+                    {
+                        case "1":
+                            VizualizeazaNoteStudent(carnet);
+                            break;
+                        case "2":
+                            InroleazaStudentLaDisciplina(carnet);
+                            break;
+                        case "3":
+                            TrimiteSiUrmaresteContestatie(carnet.Discipline);
+                            break;
+                        case "4":
+                            Fisiere salvare = new Fisiere();
+                            salvare.WriteToFile(carnet);
+                            break;
+                        case "5":
+                            return;
+                        default:
+                            Console.WriteLine("Optiune invalida. Incercati din nou.");
+                            Console.ReadKey();
+                            break;
+                    }
+                }
+                catch (Exception ex) 
+                {
+                    _logger.LogWarning(ex, "A aparut o eroare in meniul student.");
                 }
             }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning(ex, "A aparut o eroare in meniul student.");
-        }
     }
 
-    void MeniuAdministrator(Carnet carnet, CalculatorMedieAnualaSiMulti calcMedie)
+    private void MeniuAdministrator(Carnet carnet, CalculatorMedieAnualaSiMulti calcMedie)
     {
-        try
-        {
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("\n--- Meniu Administrator ---");
-                Console.WriteLine("1. Calculeaza media la disciplina");
-                Console.WriteLine("2. Publica note");
-                Console.WriteLine("3. Inapoi la meniul principal");
-                Console.Write("Alege o optiune: ");
-
-                switch (Console.ReadLine())
+                try
                 {
-                    case "1":
-                        CalculeazaMedii(carnet, calcMedie);
-                        break;
-                    case "2":
-                        PublicaNoteAdministrator(carnet);
-                        break;
-                    case "3":
-                        return;
-                    default:
-                        Console.WriteLine("Optiune invalida. Incercati din nou.");
-                        Console.ReadKey();
-                        break;
+
+
+                    Console.Clear();
+                    Console.WriteLine("\n--- Meniu Administrator ---");
+                    Console.WriteLine("1. Calculeaza media la disciplina");
+                    Console.WriteLine("2. Publica note");
+                    Console.WriteLine("3. Salveaza modificarile");
+                    Console.WriteLine("4. Raspunde la contestatii");
+                    Console.WriteLine("5. Inapoi la meniul principal");
+                    Console.Write("Alege o optiune: ");
+
+                    switch (Console.ReadLine())
+                    {
+                        case "1":
+                            CalculeazaMedii(carnet, calcMedie);
+                            break;
+                        case "2":
+                            PublicaNoteAdministrator(carnet.Discipline);
+                            break;
+                        case "3" :
+                            Fisiere salvare = new Fisiere();
+                            salvare.WriteToFile(carnet);
+                            break;
+                        case "4":
+                            Contestatii(carnet.Discipline);
+                            break;
+                        case "5":
+                            return;
+                        default:
+                            Console.WriteLine("Optiune invalida. Incercati din nou.");
+                            Console.ReadKey();
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "A aparut o eroare in meniul administrator.");
                 }
             }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning(ex, "A aparut o eroare in meniul administrator.");
-        }
     }
 
-    void VizualizeazaNoteStudent(Carnet carnet)
+    private void VizualizeazaNoteStudent(Carnet carnet)
     {
         try
         {
@@ -173,7 +192,7 @@ public class MeniuInteractiv : IMeniuInteractiv
         }
     }
 
-    void InroleazaStudentLaDisciplina(Carnet carnet)
+    private void InroleazaStudentLaDisciplina(Carnet carnet)
     {
         try
         {   
@@ -193,6 +212,12 @@ public class MeniuInteractiv : IMeniuInteractiv
                     var optionala = new DisciplinaOptionala(carnet.DisciplineOptionale.Where(i=>i.Nume==nume).FirstOrDefault().Nume, 
                         carnet.DisciplineOptionale.Where(i=>i.Nume==nume).FirstOrDefault().Semestru, 
                         carnet.DisciplineOptionale.Where(i=>i.Nume==nume).FirstOrDefault().An);
+                    if (carnet.Discipline.Contains(optionala))
+                    {
+                        Console.WriteLine("Deja te-ai inrolat la aceasta disciplina!");
+                        Console.ReadKey();
+                        return;
+                    }
                     if (optionala == null)
                     {
                         Console.WriteLine("Disciplina nu a fost gasita.");
@@ -213,6 +238,12 @@ public class MeniuInteractiv : IMeniuInteractiv
                     var facultativa = new DisciplinaOptionala(carnet.DisciplineFacultative.Where(i=>i.Nume==numeFacultativa).FirstOrDefault().Nume, 
                         carnet.DisciplineFacultative.Where(i=>i.Nume==numeFacultativa).FirstOrDefault().Semestru, 
                         carnet.DisciplineFacultative.Where(i=>i.Nume==numeFacultativa).FirstOrDefault().An);
+                    if (carnet.Discipline.Contains(facultativa))
+                    {
+                        Console.WriteLine("Deja te-ai inrolat la aceasta disciplina!");
+                        Console.ReadKey();
+                        return;
+                    }
                     if (facultativa == null)
                     {
                         Console.WriteLine("Disciplina nu a fost gasita.");
@@ -237,31 +268,51 @@ public class MeniuInteractiv : IMeniuInteractiv
         }
     }
 
-    void TrimiteSiUrmaresteContestatie(Carnet carnet)
+    private void TrimiteSiUrmaresteContestatie(List<Disciplina> discipline)
     {
         try
         {
-            Console.Write("Introduceti numele disciplinei: ");
-            string nume = Console.ReadLine();
-            var disciplina = carnet.Discipline.FirstOrDefault(d => d.Nume == nume);
-
-            if (disciplina == null)
+            Console.WriteLine("1.Trimite contenstatie");
+            Console.WriteLine("2.Urmareste contenstatii");
+            string choice=Console.ReadLine();
+            switch(choice)
             {
-                Console.WriteLine("Disciplina nu a fost gasita.");
-                Console.ReadKey();
-                return;
+                case "1":
+                Console.Write("Introduceti numele disciplinei: ");
+                string nume = Console.ReadLine();
+                var disciplina = discipline.FirstOrDefault(d => d.Nume == nume);
+
+                if (disciplina == null)
+                {
+                    Console.WriteLine("Disciplina nu a fost gasita.");
+                    Console.ReadKey();
+                    return;
+                }
+
+                var notaContestata = disciplina.Note.Min(nota => nota.Valoare);
+                var contestatie = new Contestatie(notaContestata);
+                disciplina.Note.Remove(contestatie);
+                discipline.Where(i=>i.Nume==nume).FirstOrDefault().AdaugaNota(contestatie);
+                break;
+                case "2": 
+                    Console.Write("Introduceti numele disciplinei: "); 
+                    string numeDisciplina = Console.ReadLine();
+                    if (!(discipline.Where(i => i.Nume == numeDisciplina).FirstOrDefault().Note.Last() is Contestatie))
+                    {
+                        Console.WriteLine("Aceasta disciplina nu are contestatii.");
+                        return;
+                    }
+                    else
+                    {
+                        Contestatie disciplinaContestata = (Contestatie)(discipline.Where(i => i.Nume == numeDisciplina).FirstOrDefault().Note.Last());
+                        if(disciplinaContestata.StareContestatie=="In asteptare")
+                            Console.WriteLine(disciplinaContestata.StareContestatie);
+                        else
+                            Console.WriteLine($"Nota dupa contestatie: {disciplinaContestata.NotaDupaContestatie}");
+                            
+                    }
+                    break;
             }
-
-            Console.Write("Introduceti nota contestata: ");
-            float nota = float.Parse(Console.ReadLine());
-            var contestatie = new Contestatie(nota);
-            disciplina.AdaugaNota(contestatie);
-
-            Console.Write("Introduceti noua nota dupa contestatie: ");
-            float notaNoua = float.Parse(Console.ReadLine());
-            contestatie.ActualizeazaNota(notaNoua, "Aprobata");
-
-            Console.WriteLine($"Nota dupa contestatie: {contestatie.NotaDupaContestatie}");
             Console.ReadKey();
         }
         catch (Exception ex)
@@ -270,7 +321,7 @@ public class MeniuInteractiv : IMeniuInteractiv
         }
     }
 
-    void CalculeazaMedii(Carnet carnet, CalculatorMedieAnualaSiMulti calcMedie)
+    private void CalculeazaMedii(Carnet carnet, CalculatorMedieAnualaSiMulti calcMedie)
     {
         try
         {
@@ -290,14 +341,86 @@ public class MeniuInteractiv : IMeniuInteractiv
         }
     }
 
-    void PublicaNoteAdministrator(Carnet carnet)
+    private void Contestatii(List<Disciplina> discipline)
+    {
+        Console.WriteLine("Introdu numele disciplinei pentru a verifica contestatiile: ");
+        string numeDisciplina = Console.ReadLine();
+        try
+        {
+            if (!(discipline.Where(i => i.Nume == numeDisciplina).FirstOrDefault().Note.Last() is Contestatie))
+            {
+                Console.WriteLine("Aceasta disciplina nu are contestatii.");
+                return;
+            }
+            else
+            {
+                Contestatie disciplinaContestata =
+                    (Contestatie)(discipline.Where(i => i.Nume == numeDisciplina).FirstOrDefault().Note.Last());
+                Console.WriteLine("Introdu nota actualizata: ");
+                float nota = float.Parse(Console.ReadLine());
+                if (disciplinaContestata.Validare(disciplinaContestata.NotaDupaContestatie))
+                    disciplinaContestata.ActualizeazaNota(nota, "Contestatie verificata");
+                else
+                    Console.WriteLine("Valoare invalida!");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex.Message);
+        }
+    }
+    
+    private void PublicaNoteAdministrator(List<Disciplina> discipline)
     {
         try
         {
-            foreach (var disciplina in carnet.Discipline)
+            foreach (var disciplina in discipline)
             {
-                disciplina.PublicaNote();
+                Console.WriteLine($"Nume: {disciplina.Nume}, Semestru: {disciplina.Semestru}, An: {disciplina.An}");
             }
+            Console.Write("Introduceti numele disciplinei: ");
+            string nume = Console.ReadLine();
+            Console.WriteLine("Introduceti tipul de nota (1-activitate/2-examen");
+            string tip = Console.ReadLine();
+            switch (tip)
+            { 
+                case "1": 
+                    while (true) 
+                    { 
+                        Console.WriteLine("Introduceti nota(introduceti 0 pentru a iesi): ");
+                        float nota = float.Parse(Console.ReadLine());
+                        if (nota == 0)
+                            return;
+                        Nota notaActivitate = new NotaActivitate(nota);
+                        if (notaActivitate.Validare(notaActivitate.Valoare))
+                        {
+                            discipline.Where(i=>i.Nume==nume).FirstOrDefault().AdaugaNota(notaActivitate);
+                        }
+                        else
+                            Console.WriteLine("Nota invalida!");
+                    }
+                case "2":
+                    if (discipline.Where(i => i.Nume == nume).FirstOrDefault().Note.OfType<NotaExamen>().Count() != 0)
+                    {
+                        Console.WriteLine("Disciplina are deja nota pentru examen!");
+                        break;
+                    }
+                    Console.WriteLine("Introduceti nota: "); 
+                    float notaExamen = float.Parse(Console.ReadLine());
+                    if (notaExamen == 0) 
+                        return;
+                    Nota notaEx = new NotaExamen(notaExamen);
+                    if (notaEx.Validare(notaEx.Valoare))
+                    {
+                        discipline.Where(i => i.Nume == nume).FirstOrDefault().AdaugaNota(notaEx);
+                    }
+                    else
+                        Console.WriteLine("Nota invalida!");
+                    break;
+                default:
+                    Console.WriteLine("Optiune invalida!");
+                    break;
+                }
             Console.ReadKey();
         }
         catch (Exception ex)

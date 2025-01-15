@@ -1,12 +1,42 @@
 using CarnetDeNote;
 
-public abstract class Disciplina
+public class Disciplina
 {
-    public string Nume { get; protected set; }
-    public int Semestru { get; protected set; }
-    public int An { get; private set; }
-    public List<Nota> Note { get; private set; }
-    public int Medie { get; set; }
+    private string _nume;
+    private int _semestru;
+    private int _an;
+    private List<Nota> _note;
+    private float _medie;
+
+    public string Nume
+    {
+        get => _nume;
+        set => _nume = value;
+    }
+
+    public int Semestru
+    {
+        get => _semestru;
+        private set => _semestru = value;
+    }
+
+    public int An
+    {
+        get => _an;
+        private set => _an = value;
+    }
+
+    public List<Nota> Note
+    {
+        get => _note; 
+        set => _note = value;
+    }
+
+    public float Medie
+    {
+        get => _medie;
+        set => _medie = value;
+    }
 
     public Disciplina(string nume, int semestru, int an)
     {
@@ -41,4 +71,5 @@ public abstract class Disciplina
             Note.ForEach(n => Console.WriteLine($"Nota: {n.Valoare}"));
         }
     }
+    
 }

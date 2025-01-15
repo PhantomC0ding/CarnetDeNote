@@ -16,7 +16,10 @@ internal class Program
             .WriteTo.Console()
             .CreateLogger();
         var host = Host.CreateDefaultBuilder()
-            .ConfigureServices((context, services) => { services.AddTransient<IMeniuInteractiv, MeniuInteractiv>(); })
+            .ConfigureServices((context, services) =>
+            {
+                services.AddTransient<IMeniuInteractiv, MeniuInteractiv>();
+            })
             .UseSerilog()
             .Build();
 

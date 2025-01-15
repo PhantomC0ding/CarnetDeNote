@@ -30,6 +30,6 @@ public class Carnet
                 new DisciplinaFacultativa("Filosofie", 2, 3),
                 new DisciplinaFacultativa("Logica", 2, 3),
                 new DisciplinaFacultativa("Psihologie", 2, 3)
-            };;
+            };
         }
 }
